@@ -1,6 +1,6 @@
 Yii2 Toastr Notification
 ========================
-This is the [Toastr][https://github.com/CodeSeven/toastr] extension for Yii 2. It encapsulates Toastr plugin in terms of Yii widgets, and makes ajax notification easy to implement.
+This is the [Toastr](https://github.com/CodeSeven/toastr) extension for Yii 2. It encapsulates Toastr plugin in terms of Yii widgets, and makes ajax notification easy to implement.
 
 Installation
 ------------
