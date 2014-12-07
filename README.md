@@ -74,3 +74,22 @@ fetch notification from ajax url
     ]
 ]);?>
 ```
+
+the ajax controller should return an array like this
+```php
+public function actionNotificationFeed(){
+    $ret = [
+        [
+            'type' => 'error',
+            'message' => 'error message',
+            'title' => 'Hey!'
+        ],
+        [
+            'type' => 'info',
+            'message' => 'another message',
+            'title' => 'Hello'
+        ]
+    ];
+    return \yii\helpers\Json::encode($ret);
+}
+```
