@@ -28,7 +28,11 @@ Usage
 Once the extension is installed, you can test that the extension works by simply use it in your code by  :
 
 ```php
-<?= \odaialali\yii2toastr\Toastr::widget(); ?>
+<?= \odaialali\yii2toastr\Toastr::widget([
+    'toastType' => 'error',
+    'message' => 'This is an error.',
+    'customStyle' => false
+]);?>
 ```
 
 There are 2 main useful widgets
@@ -39,7 +43,21 @@ ToastrFlash
 displays Yii flash messages in toastr notification style
 
 ```php
-<?= \odaialali\yii2toastr\ToastrFlash::widget(); ?>
+<?php
+$session = \Yii::$app->getSession();
+$session->setFlash('error', "msg1");
+$session->setFlash('danger', "msg2");
+$session->setFlash('warning', "msg3");
+$session->setFlash('info', "msg4");
+$session->setFlash('success', "msg5");
+?>
+```
+```php
+<?= \odaialali\yii2toastr\ToastrFlash::widget([
+    'options' => [
+        'positionClass' => 'toast-bottom-left'
+    ]
+]);?>
 ```
 
 ToastrAjaxFeed
@@ -50,6 +68,7 @@ fetch notification from ajax url
 ```php
 <?= \odaialali\yii2toastr\ToastrAjaxFeed::widget([
     'feedUrl' => yii\helpers\Url::toRoute('/user/profile/notification-feed'),
+    'interval' => 5000,
     'options' => [
         'positionClass' => 'toast-bottom-left'
     ]

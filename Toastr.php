@@ -11,6 +11,7 @@ namespace odaialali\yii2toastr;
 use odaialali\yii2toastr\ToastrAsset;
 use odaialali\yii2toastr\ToastrCustomAsset;
 use yii\helpers\Json;
+
 /**
  * Description of Toastr
  *
