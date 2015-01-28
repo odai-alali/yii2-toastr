@@ -31,6 +31,8 @@ class Toastr extends \yii\base\Widget{
     
     public $options = [];
     
+    protected $jsonOptions = [];
+    
     public function init() {
         parent::init();
         if(empty($this->toastType)){
@@ -51,22 +53,45 @@ class Toastr extends \yii\base\Widget{
         $this->registerNotification();
     }
     
+    protected function initJsOptions(){
+        //if(isset)
+        $value_arr = array();
+        $replace_keys = array();
+        if(isset($this->options['onclick']) && $this->options['onclick'] != null){
+            $value_arr[] = $this->options['onclick'];
+            $this->options['onclick'] = '%onclick%';
+            $replace_keys[] = '"%onclick%"';
+        }
+        if(isset($this->options['onShown']) && $this->options['onShown'] != null){
+            $value_arr[] = $this->options['onShown'];
+            $this->options['onShown'] = '%onShown%';
+            $replace_keys[] = '"%onShown%"';
+        }
+        if(isset($this->options['onHidden']) && $this->options['onHidden'] != null){
+            $value_arr[] = $this->options['onHidden'];
+            $this->options['onHidden'] = '%onHidden%';
+            $replace_keys[] = '"%onHidden%"';
+        }
+        $this->jsonOptions = empty($this->options) ? '[]' : Json::encode($this->options);
+        $this->jsonOptions = str_replace($replace_keys, $value_arr, $this->jsonOptions);
+    }
+    
     protected function registerNotification(){
         $view = $this->getView();
         if ($this->options !== false) {
-            $options = empty($this->options) ? '[]' : Json::encode($this->options);
+            $this->initJsOptions();
             switch($this->toastType){
                 case 'error':
-                    $js = "toastr.error('".$this->message."', '".$this->title."', ".$options.")";
+                    $js = "toastr.error('".$this->message."', '".$this->title."', ".$this->jsonOptions.")";
                     break;
                 case 'warning':
-                    $js = "toastr.warning('".$this->message."', '".$this->title."', ".$options.")";
+                    $js = "toastr.warning('".$this->message."', '".$this->title."', ".$this->jsonOptions.")";
                     break;
                 case 'info':
-                    $js = "toastr.info('".$this->message."', '".$this->title."', ".$options.")";
+                    $js = "toastr.info('".$this->message."', '".$this->title."', ".$this->jsonOptions.")";
                     break;
                 case 'success':
-                    $js = "toastr.success('".$this->message."', '".$this->title."', ".$options.")";
+                    $js = "toastr.success('".$this->message."', '".$this->title."', ".$this->jsonOptions.")";
                     break;
             }
             if(isset($js)){
