@@ -15,6 +15,10 @@ use odaialali\yii2toastr\Toastr;
  * @author Odai Alali <odai.alali@gmail.com>
  */
 class ToastrFlash extends \yii\base\Widget {
+    /*
+     * @var boolean use custom style in asset ToastrCustomAsset
+     */
+    public $customStyle = true;
     /**
      * @var array the alert types configuration for the flash messages.
      */
@@ -43,6 +47,7 @@ class ToastrFlash extends \yii\base\Widget {
                         'toastType' => $this->alertTypes[$type],
                         'message' => $message,
                         'options' => $this->options,
+                        'customStyle' => $this->customStyle 
                     ]);
                 }
 

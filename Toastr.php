@@ -23,6 +23,9 @@ class Toastr extends \yii\base\Widget{
     const TYPE_SUCCESS = 'success';
     const TYPE_WARNING = 'warning';
     
+    /*
+     * @var boolean use custom style in asset ToastrCustomAsset
+     */
     public $customStyle = true;
     public $toastType;
     
